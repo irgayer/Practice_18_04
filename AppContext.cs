@@ -15,6 +15,7 @@
         public AppContext()
             : base("name=AppContext")
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppContext>());
         }
 
         // Добавьте DbSet для каждого типа сущности, который требуется включить в модель. Дополнительные сведения 
@@ -23,7 +24,6 @@
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Cart> Carts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             

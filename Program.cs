@@ -10,7 +10,25 @@ namespace Practice_18_04
     {
         static void Main(string[] args)
         {
+            InternetStore store = new InternetStore();
 
+            /*using(var context = new AppContext())
+            {
+                context.Products.Add(new Product()
+                {
+                    Name = "Селдь",
+                    Cost = 1240
+                });
+                context.Products.Add(new Product()
+                {
+                    Name = "Пиво",
+                    Cost = 2000
+                });
+                context.SaveChanges();
+            }*/
+
+            store.Run();
+            Console.ReadLine();
         }
     }
 }

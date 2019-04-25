@@ -1,0 +1,13 @@
+C:\Users\вава\Source\Repos\Practice_18_04\obj\Debug\Practice_18_04.csprojAssemblyReference.cache
+C:\Users\вава\Source\Repos\Practice_18_04\obj\Debug\Practice_18_04.csproj.CoreCompileInputs.cache
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\Practice_18_04.exe.config
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\Practice_18_04.exe
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\Practice_18_04.pdb
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\EntityFramework.dll
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\EntityFramework.xml
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\вава\Source\Repos\Practice_18_04\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\вава\Source\Repos\Practice_18_04\obj\Debug\Practice_18_04.csproj.CopyComplete
+C:\Users\вава\Source\Repos\Practice_18_04\obj\Debug\Practice_18_04.exe
+C:\Users\вава\Source\Repos\Practice_18_04\obj\Debug\Practice_18_04.pdb

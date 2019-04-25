@@ -14,13 +14,16 @@ namespace Practice_18_04
         Login loginer;
         List<User> users;
         List<Product> products;
-        Cart cart;
+        Register register;
+        PasswordWriter passwordWriter;
 
         public void Run()
         {
             loginer = new Login();
             users = new List<User>();
-            
+            register = new Register();
+            passwordWriter = new PasswordWriter();
+
             using (var context = new AppContext())
             {
                 users = context.Users.ToList();
@@ -38,14 +41,16 @@ namespace Practice_18_04
                             Console.WriteLine("Введите логин: ");
                             loginStr = Console.ReadLine();
                             Console.WriteLine("Введите пароль: ");
-                            passwordStr = Console.ReadLine();
-
+                            passwordStr = passwordWriter.Write();
+                            
                             if (loginer.Access(users, loginStr, passwordStr))
                             {
-                                User user = (User)from u in users
-                                                  where u.Login.ToUpper().Equals(loginStr)
-                                                  select u;
-                                Console.WriteLine("Добро пожаловать!");
+                                User user;
+                                using(var context = new AppContext())
+                                {
+                                user = context.Users.Where(u => u.Login == loginStr).FirstOrDefault();
+                                
+                                Console.WriteLine($"Добро пожаловать!");
                                 bool flag = true;
 
                                 while (flag)
@@ -54,19 +59,52 @@ namespace Practice_18_04
                                     {
                                         case 1:
                                             {
-                                                foreach (var p in products)
+                                                if(products.Count > 0)
                                                 {
-                                                    p.Print();
+                                                    for(int i = 0; i < products.Count; i++) 
+                                                    {
+                                                        Console.WriteLine($"{i + 1})");
+                                                        products[i].Print();
+                                                    }
+                                                    Console.WriteLine("Введите индекс товара: ");
+                                                    if(int.TryParse(Console.ReadLine(), out int buyIndex))
+                                                    {
+                                                        if(buyIndex > 0 && buyIndex <= products.Count)
+                                                        {
+                                                            user.Cart.Products.Add(new Product()
+                                                            {
+                                                                Cost = products[buyIndex - 1].Cost,
+                                                                Name = products[buyIndex - 1].Name
+                                                            });
+                                                        }
+                                                    }
                                                 }
-
                                                 break;
                                             }
                                         case 2:
                                             {
+                                                if(user.Cart.Products.Count > 0)
+                                                {
+                                                    foreach(var product in user.Cart.Products)
+                                                    {
+                                                        product.Print();
+                                                    }  
+                                                }
                                                 break;
                                             }
                                         case 3:
                                             {
+                                                if(user.Cart.Products.Count > 0)
+                                                {
+                                                    double sum = 0;
+                                                    foreach(var product in user.Cart.Products) 
+                                                    {
+                                                        sum+=product.Cost;
+                                                        product.Print();
+                                                    }
+                                                    Console.WriteLine($"К оплате: {sum}");
+                                                    user.Cart.Products.Clear();
+                                                }
                                                 break;
                                             }
                                         case 4:
@@ -76,12 +114,30 @@ namespace Practice_18_04
                                             }
                                     }
                                 }
-                                
+                                context.SaveChanges();
+                                }
                             }
+                            else  
+                                Console.WriteLine("Неверный логин пользователя или пароль!");
                             break;
                         }
                     case 2:
                         {
+                            if(register.TryAddUser(users, out User user))
+                            {
+                                Console.WriteLine("Регистрация прошла успешно.");
+                                user.Cart = new Cart();
+                                users.Add(user);
+                                using(var context = new AppContext())
+                                {
+                                    context.Users.Add(user);
+                                    context.SaveChanges();
+                                }
+                            }
+                            else 
+                            {
+                                Console.WriteLine("Регистрация прервана!");
+                            }
                             break;
                         }
                     case 3:

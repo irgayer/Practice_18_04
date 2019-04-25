@@ -39,7 +39,6 @@ namespace Practice_18_04
                 {
                     newUser.Login = usLoginStr.Trim();
                     newUser.Password = usPsswdStr;
-                        
                     return true;
                 }
                 else WriteLine("Пароль недостаточно длинный!");
